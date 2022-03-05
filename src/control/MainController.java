@@ -89,6 +89,7 @@ public class MainController implements Initializable{
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
+    	// Sets the default values for the table
 		incomeDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
 		incomeDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
 		incomeQuantCol.setCellValueFactory(new PropertyValueFactory<>("quantityStr"));
@@ -111,6 +112,7 @@ public class MainController implements Initializable{
     
     @FXML
     void filterDate(ActionEvent event) {
+    	// Creates two new observable lists to store the filtered items
     	ObservableList<Activity> incomeFiltered = FXCollections.observableArrayList();
     	ObservableList<Activity> expensesFiltered = FXCollections.observableArrayList();
     	Alert alert = new Alert(AlertType.WARNING);
@@ -149,6 +151,7 @@ public class MainController implements Initializable{
     
     @FXML
     void restoreFilter(ActionEvent event) {
+    	// Returns the table back to how it was without filters
     	beginDP.setValue(null);
 		endDP.setValue(null);
     	incomeTable.setItems(IncomeData.data);
@@ -159,6 +162,7 @@ public class MainController implements Initializable{
 
     @FXML
     void registerActivity(ActionEvent event) throws IOException {
+    	// Goes to the register activity window
     	FXMLLoader loader = new FXMLLoader(Main.class.getResource("../ui/RegisterActivity.fxml"));
 		loader.setController(new RegisterActivity());
 		Parent parent = (Parent) loader.load();
@@ -170,6 +174,7 @@ public class MainController implements Initializable{
 
 	@FXML
     void updateTotals(ActionEvent event) {
+		// Updates the total values for every counter of the window
 		double totalIncome = 0.0;
 		double totalExpenses = 0.0;
 		double remaining = 0.0;
@@ -191,6 +196,7 @@ public class MainController implements Initializable{
 	
 	@FXML
     void eliminateActivity(ActionEvent event) {
+		// Eliminates a selected activity frome the table
 		ExpensesData.data.remove(expenseActivityClicked);
 		IncomeData.data.remove(incomeActivityClicked);
     }

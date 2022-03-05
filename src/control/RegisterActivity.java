@@ -38,9 +38,11 @@ public class RegisterActivity implements Initializable{
 
 	@FXML
 	void add(ActionEvent event) {
+		// Adds a new activity taking into account the fields that the user filled
 		String errorMessage = "";
 		Alert alert = new Alert(AlertType.WARNING);
 		
+		// Check if every field is filled
 		if (quantityTF.getText().trim().isEmpty()) {
 			errorMessage += "- Please provide the quantity of the activity.\n";
 		}
@@ -54,6 +56,7 @@ public class RegisterActivity implements Initializable{
 			errorMessage += "- Please specify the type of activity";
 		}
 		
+		// If the error message is greater than zero, display an alert
 		if (errorMessage.length() > 0) {
 			alert.setTitle("Warning");
 			alert.setHeaderText("Incomplete fields");
@@ -62,6 +65,7 @@ public class RegisterActivity implements Initializable{
 			alert.show();
 		} else {
 			try {
+				// Try adding an activity to the table
 				Activity addedActivity = new Activity(descriptionTF.getText(), datePicker.getValue(), Double.parseDouble(quantityTF.getText()), typeBX.getValue());
 				
 				if (typeBX.getValue() == ActivityType.EXPENSE) {
@@ -84,12 +88,14 @@ public class RegisterActivity implements Initializable{
 
 	@FXML
 	void cancel(ActionEvent event) {
+		// Close the window in case of pressing the cancel button
 		Stage stage = (Stage) this.addBTN.getScene().getWindow();
     	stage.close();
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		// Set the combo-box with ActivityType values
 		typeBX.getItems().setAll(ActivityType.values());
 	}
 }
